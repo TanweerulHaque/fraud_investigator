@@ -77,8 +77,8 @@ def build_investigator_graph(
     compiled = graph.compile()
     _compiled_graph = compiled
 
-    if export_graph:
-        export_graph_artifact(compiled)
+    # if export_graph:
+    #     export_graph_artifact(compiled)
 
     return compiled
 
