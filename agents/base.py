@@ -255,6 +255,12 @@ class BaseAgent:
         return indicators
 
     @staticmethod
+    def coerce_str(value: Any, default: str = "") -> str:
+        if value is None:
+            return default
+        return str(value).strip() if str(value).strip().lower() != "none" else default
+
+    @staticmethod
     def coerce_str_list(value: Any) -> list[str]:
         if value is None:
             return []

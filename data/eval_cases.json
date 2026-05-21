@@ -104,7 +104,11 @@
                 "aml_score": 0.1,
                 "account_takeover_score": 0.08
             },
-            "reviewer_label": "not_fraud"
+            "reviewer_label": "not_fraud",
+            "metadata": {
+                "scenario": "good_user",
+                "reviewer_notes": "Mature verified account, benign subscription spend, low fraud/ATO scores, no device integrity issues."
+            }
         },
         {
             "case_id": "EVAL-FRAUD-001",

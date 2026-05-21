@@ -24,7 +24,7 @@ class IntakeStructured(BaseModel):
     case_id: str
     quality_flags: list[str] = Field(default_factory=list)
     missing_fields: list[str] = Field(default_factory=list)
-    intake_notes: str = ""
+    intake_notes: str = Field(default="", description="Analyst intake notes; never null")
 
 
 class EmbeddingStructured(BaseModel):
