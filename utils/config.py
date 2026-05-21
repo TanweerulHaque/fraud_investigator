@@ -20,6 +20,10 @@ REQUIRED_LLM_AGENTS = (
     "critic",
     "explanation",
     "memory_update",
+    "reward_modeling",
+    "reward_retrieval",
+    "reward_scoring",
+    "reward_critic",
 )
 
 

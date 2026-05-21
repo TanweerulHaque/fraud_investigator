@@ -164,6 +164,7 @@ class RetrievedCase(BaseModel):
     decision: str | None = None
     primary_risk_tags: list[str] = Field(default_factory=list)
     reviewer_notes_snippet: str = ""
+    reward_representation: dict[str, Any] | None = None
 
 
 class RiskIndicator(BaseModel):
@@ -197,3 +198,23 @@ class ExplanationOutput(BaseModel):
     analyst_rationale: str
     top_reasons: list[str]
     risk_narrative: str
+
+
+class RewardRepresentation(BaseModel):
+    """Learned preferences and weights from a historical case review."""
+    signal_weights: dict[str, float] = Field(default_factory=dict)
+    interaction_effects: dict[str, float] = Field(default_factory=dict)
+    risk_tolerance: float = 0.5  # 0 to 1 scale
+    precision_vs_recall_preference: str = "balanced" # precision_heavy, recall_heavy, balanced
+    reward_explanation: str = ""
+
+
+class RewardScoreOutput(BaseModel):
+    """Result of scoring the current decision against historical reward representations."""
+    reward_score: float = Field(ge=0.0, le=1.0)
+    confidence_alignment: float = Field(ge=0.0, le=1.0)
+    decision_alignment: float = Field(ge=0.0, le=1.0)
+    top_positive_signals: list[str] = Field(default_factory=list)
+    top_negative_signals: list[str] = Field(default_factory=list)
+    interaction_effects: list[str] = Field(default_factory=list)
+    reward_explanation: str

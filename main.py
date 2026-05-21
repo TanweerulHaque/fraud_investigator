@@ -113,6 +113,15 @@ def _print_result(result) -> None:
     for k, v in exp.to_analyst_sections().items():
         console.print(f"  [cyan]{k}[/cyan]: {str(v)[:200]}..." if len(str(v)) > 200 else f"  [cyan]{k}[/cyan]: {v}")
 
+    if result.reward_score_output:
+        r = result.reward_score_output
+        console.print("\n[bold magenta]Reward Alignment Scoring[/bold magenta]")
+        console.print(f"  [magenta]Reward Score:[/magenta] {r.reward_score:.2f}")
+        console.print(f"  [magenta]Confidence Alignment:[/magenta] {r.confidence_alignment:.2f}")
+        console.print(f"  [magenta]Top Positive Signals:[/magenta] {', '.join(r.top_positive_signals)}")
+        console.print(f"  [magenta]Top Negative Signals:[/magenta] {', '.join(r.top_negative_signals)}")
+        console.print(f"  [magenta]Explanation:[/magenta] {r.reward_explanation}")
+
 
 if __name__ == "__main__":
     app()

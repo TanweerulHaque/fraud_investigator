@@ -16,6 +16,10 @@ from agents.graph_visualization import export_graph_artifact
 from agents.llm_factory import setup_langsmith
 from agents.memory_update_agent import run_memory_update
 from agents.risk_synthesis_agent import run_risk_synthesis
+from agents.reward_modeling_agent import run_reward_modeling
+from agents.reward_retrieval_agent import run_reward_retrieval
+from agents.reward_scoring_agent import run_reward_scoring
+from agents.reward_critic_agent import run_reward_critic
 from memory.long_term import LongTermMemory
 from schemas.case import ReviewerDecision
 from schemas.output import InvestigationResult
@@ -48,19 +52,25 @@ def build_investigator_graph(
     graph.add_node("case_intake", lambda s: run_case_intake(s))
     graph.add_node("embedding", lambda s: run_embedding(s))
     graph.add_node("evidence_retrieval", lambda s: run_evidence_retrieval(s, lt))
+    graph.add_node("reward_retrieval", lambda s: run_reward_retrieval(s))
     graph.add_node("behavioral_pattern", lambda s: run_behavioral_pattern(s))
     graph.add_node("risk_synthesis", lambda s: run_risk_synthesis(s))
+    graph.add_node("reward_scoring", lambda s: run_reward_scoring(s))
     graph.add_node("critic", lambda s: run_critic(s))
+    graph.add_node("reward_critic", lambda s: run_reward_critic(s))
     graph.add_node("explanation", lambda s: run_explanation(s))
     graph.add_node("memory_update", lambda s: run_memory_update(s, lt))
 
     graph.set_entry_point("case_intake")
     graph.add_edge("case_intake", "embedding")
     graph.add_edge("embedding", "evidence_retrieval")
-    graph.add_edge("evidence_retrieval", "behavioral_pattern")
+    graph.add_edge("evidence_retrieval", "reward_retrieval")
+    graph.add_edge("reward_retrieval", "behavioral_pattern")
     graph.add_edge("behavioral_pattern", "risk_synthesis")
-    graph.add_edge("risk_synthesis", "critic")
-    graph.add_edge("critic", "explanation")
+    graph.add_edge("risk_synthesis", "reward_scoring")
+    graph.add_edge("reward_scoring", "critic")
+    graph.add_edge("critic", "reward_critic")
+    graph.add_edge("reward_critic", "explanation")
     graph.add_edge("explanation", "memory_update")
     graph.add_edge("memory_update", END)
 
@@ -133,6 +143,8 @@ def run_investigation(
         critic=final.get("critic_output"),
         explanation=final.get("explanation_output"),
         explainability=explainability,
+        reward_score_output=final.get("reward_score_output"),
+        reward_critic=final.get("reward_critic_output"),
         agent_trace=final.get("agent_trace") or [],
         agent_outputs=final.get("agent_outputs") or {},
         quality_flags=final.get("quality_flags") or [],
@@ -140,12 +152,30 @@ def run_investigation(
     )
 
 
-def seed_memory_from_file(path: str | None = None, force: bool = False) -> int:
+def seed_memory_from_file(path: str | None = None, force: bool = False, delete_db: bool = False) -> int:
     """Seed Chroma + SQLite using embedding agent (summary + vector)."""
+    import shutil
     from agents.embedding_agent import EmbeddingAgent
     from tools.case_loader import load_cases_from_json
     from tools.validator import validate_case_dict
     from schemas.case import NormalizedCase
+    from utils.config import resolve_path
+
+    # 1. Force hard delete of the databases prior to initializing LongTermMemory
+    if delete_db:
+        logger.info("Force flag detected. Re-initializing ChromaDB and SQLite databases...")
+        
+        # Resolve target paths explicitly
+        db_file = Path("data/fraud_twin.db")
+        chroma_dir = Path("data/chroma")
+        
+        if db_file.exists():
+            db_file.unlink()
+            logger.info("Deleted existing SQLite file: %s", db_file)
+            
+        if chroma_dir.exists() and chroma_dir.is_dir():
+            shutil.rmtree(chroma_dir)
+            logger.info("Deleted existing ChromaDB directory: %s", chroma_dir)
 
     lt = get_long_term_memory()
 
@@ -181,6 +211,13 @@ def seed_memory_from_file(path: str | None = None, force: bool = False) -> int:
         label = fc.reviewer_label.value if fc.reviewer_label else None
         expl = raw.get("metadata", {}).get("reviewer_notes", "")
 
+        logger.info("Extracting reward representation...")
+        hist_cases = lt.get_all_cases_with_rewards()
+        if hist_cases:
+            logger.info(f"Found {len(hist_cases)} previous historical cases to guide reward modeling.")
+        reward_out = run_reward_modeling(state, historical_cases=hist_cases)
+        reward_rep = reward_out.get("reward_representation")
+
         logger.info("Remembering investigation...")
         lt.remember_investigation(
             case=norm,
@@ -190,6 +227,7 @@ def seed_memory_from_file(path: str | None = None, force: bool = False) -> int:
             decision=label or "",
             confidence=0.0,
             explanation={"analyst_rationale": expl},
+            reward_representation=reward_rep,
         )
         count += 1
 

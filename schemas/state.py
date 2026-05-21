@@ -12,6 +12,7 @@ from schemas.case import (
     ExplanationOutput,
     NormalizedCase,
     RetrievedCase,
+    RewardScoreOutput,
     ReviewerDecision,
 )
 
@@ -41,6 +42,10 @@ class InvestigatorState(TypedDict, total=False):
     decision: ReviewerDecision | None
     confidence: float | None
     decision_drivers: list[str]
+
+    reward_representations: list[dict[str, Any]]
+    reward_score_output: RewardScoreOutput | None
+    reward_critic_output: dict[str, Any] | None
 
     agent_outputs: dict[str, dict[str, Any]]
     agent_trace: list[dict[str, Any]]

@@ -35,6 +35,14 @@ class SimilaritySearchTool:
                     tags = json.loads(tags)
                 except json.JSONDecodeError:
                     tags = []
+            reward_rep = None
+            if "reward_representation" in meta:
+                import json
+                try:
+                    reward_rep = json.loads(meta["reward_representation"])
+                except json.JSONDecodeError:
+                    reward_rep = None
+
             results.append(
                 RetrievedCase(
                     case_id=case_id,
@@ -42,6 +50,7 @@ class SimilaritySearchTool:
                     decision=meta.get("decision"),
                     primary_risk_tags=tags if isinstance(tags, list) else [],
                     reviewer_notes_snippet=str(meta.get("reviewer_notes", ""))[:200],
+                    reward_representation=reward_rep,
                 )
             )
         return results

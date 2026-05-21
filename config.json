@@ -23,7 +23,11 @@
       "risk_synthesis": "llama3.2:3b",
       "critic": "llama3.2:3b",
       "explanation": "llama3.2:3b",
-      "memory_update": "llama3.2:3b"
+      "memory_update": "llama3.2:3b",
+      "reward_modeling": "llama3.2:3b",
+      "reward_retrieval": "llama3.2:3b",
+      "reward_scoring": "llama3.2:3b",
+      "reward_critic": "llama3.2:3b"
     }
   },
   "embeddings": {

@@ -128,6 +128,24 @@ class CaseStore:
             rows = conn.execute(query, params).fetchall()
         return [dict(r) for r in rows]
 
+    def get_all_cases(self) -> list[dict[str, Any]]:
+        with self._connect() as conn:
+            rows = conn.execute(
+                "SELECT case_id, payload_json, decision, confidence, primary_risk_tags, reviewer_label, explanation_json FROM cases"
+            ).fetchall()
+        return [
+            {
+                "case_id": r["case_id"],
+                "payload": json.loads(r["payload_json"]),
+                "decision": r["decision"],
+                "confidence": r["confidence"],
+                "primary_risk_tags": json.loads(r["primary_risk_tags"] or "[]"),
+                "reviewer_label": r["reviewer_label"],
+                "explanation": json.loads(r["explanation_json"] or "{}"),
+            }
+            for r in rows
+        ]
+
     def log_review_outcome(
         self,
         case_id: str,

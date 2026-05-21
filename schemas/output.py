@@ -12,6 +12,7 @@ from schemas.case import (
     ExplanationOutput,
     RetrievedCase,
     ReviewerDecision,
+    RewardScoreOutput,
 )
 
 
@@ -54,6 +55,8 @@ class InvestigationResult(BaseModel):
     retrieved_cases: list[RetrievedCase] = Field(default_factory=list)
     critic: CriticOutput | None = None
     explanation: ExplanationOutput | None = None
+    reward_score_output: RewardScoreOutput | None = None
+    reward_critic: dict[str, Any] | None = None
     explainability: ExplainabilityArtifact
     agent_trace: list[dict[str, Any]] = Field(default_factory=list)
     agent_outputs: dict[str, dict[str, Any]] = Field(default_factory=dict)

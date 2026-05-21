@@ -107,3 +107,8 @@ class VectorStore:
                 continue
             hits.append((cid, similarity, m))
         return hits
+
+    def get_all_metadata(self) -> dict[str, Any]:
+        if self.collection.count() == 0:
+            return {"ids": [], "metadatas": []}
+        return self.collection.get(include=["metadatas"])
