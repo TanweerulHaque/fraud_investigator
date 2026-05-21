@@ -1,0 +1,56 @@
+{
+  "case_id": "DEMO-001",
+  "user_profile": {
+    "user_id": "u_demo_001",
+    "account_age_days": 18,
+    "kyc_status": "verified",
+    "prior_disputes": 0
+  },
+  "installed_apps": [
+    {"package_name": "com.vpn.app", "risk_category": "vpn", "install_days_ago": 6}
+  ],
+  "transactions": [
+    {
+      "txn_id": "txn_demo_1",
+      "amount": 32000,
+      "currency": "INR",
+      "merchant_category": "wallet_transfer",
+      "channel": "upi",
+      "timestamp": "2025-05-10T01:30:00",
+      "is_cash_out": true
+    },
+    {
+      "txn_id": "txn_demo_2",
+      "amount": 28000,
+      "currency": "INR",
+      "merchant_category": "atm",
+      "channel": "atm",
+      "timestamp": "2025-05-10T02:45:00",
+      "is_cash_out": true
+    }
+  ],
+  "app_usage": {
+    "sessions_per_day": 9.0,
+    "night_usage_ratio": 0.68,
+    "unique_locations_7d": 5
+  },
+  "location_patterns": {
+    "home_country": "IN",
+    "countries_7d": ["IN", "AE"],
+    "max_geo_velocity_kmph": 850
+  },
+  "device": {
+    "device_id": "dev_demo_001",
+    "os": "android",
+    "is_emulator": false,
+    "is_rooted": true,
+    "device_changes_30d": 2
+  },
+  "model_scores": {
+    "fraud_score": 0.74,
+    "aml_score": 0.42,
+    "account_takeover_score": 0.55
+  },
+  "prior_reviews": [],
+  "metadata": {"source": "demo_cli"}
+}

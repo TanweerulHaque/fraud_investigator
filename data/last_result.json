@@ -1,0 +1,332 @@
+{
+    "case_id": "DEMO-001",
+    "decision": "fraud",
+    "confidence": 0.95,
+    "decision_drivers": [
+        "device_integrity (high): Emulator or rooted device detected",
+        "geo_velocity (high): Impossible travel velocity 850 km/h",
+        "cash_out_behavior (high): Cash-out ratio 100%",
+        "risky_apps (medium): 1 high-risk installed app(s)",
+        "account_freshness (medium): Account age 18 days",
+        "night_usage (medium): Night usage ratio 68%",
+        "ds_fraud_score (medium): Fraud model score 0.74 (elevated)",
+        "device_instability (medium): 2 device changes in 30d",
+        "Similar cases: 4/5 prior fraud decisions",
+        "DS fraud score 0.74"
+    ],
+    "behavioral_summary": {
+        "summary": "Case DEMO-001: 8 risk indicator(s), 0 stable signal(s). DS note: DS ensemble elevated.",
+        "risk_indicators": [
+            {
+                "signal": "device_integrity",
+                "severity": "high",
+                "detail": "Emulator or rooted device detected",
+                "weight": 0.18
+            },
+            {
+                "signal": "geo_velocity",
+                "severity": "high",
+                "detail": "Impossible travel velocity 850 km/h",
+                "weight": 0.16
+            },
+            {
+                "signal": "cash_out_behavior",
+                "severity": "high",
+                "detail": "Cash-out ratio 100%",
+                "weight": 0.14
+            },
+            {
+                "signal": "risky_apps",
+                "severity": "medium",
+                "detail": "1 high-risk installed app(s)",
+                "weight": 0.1
+            },
+            {
+                "signal": "account_freshness",
+                "severity": "medium",
+                "detail": "Account age 18 days",
+                "weight": 0.08
+            },
+            {
+                "signal": "night_usage",
+                "severity": "medium",
+                "detail": "Night usage ratio 68%",
+                "weight": 0.06
+            },
+            {
+                "signal": "ds_fraud_score",
+                "severity": "medium",
+                "detail": "Fraud model score 0.74 (elevated)",
+                "weight": 0.2
+            },
+            {
+                "signal": "device_instability",
+                "severity": "medium",
+                "detail": "2 device changes in 30d",
+                "weight": 0.09
+            }
+        ],
+        "stability_notes": "Stable: none. Drifting: location_pattern, device_instability.",
+        "stable_signals": [],
+        "drifting_signals": ["location_pattern", "device_instability"]
+    },
+    "retrieved_cases": [
+        {
+            "case_id": "EVAL-FRAUD-002",
+            "similarity": 0.9614,
+            "decision": "fraud",
+            "primary_risk_tags": [
+                "device_integrity",
+                "cash_out",
+                "high_ds_score"
+            ],
+            "reviewer_notes_snippet": "Reviewed case EVAL-FRAUD-002 for user u_fraud_002. Judgment: fraud (confidence 95%). Primary drivers: device_integrity (high): Emulator or rooted device detected; cash_out_behavior (high): Cash-out ra"
+        },
+        {
+            "case_id": "SEED-005",
+            "similarity": 0.9402,
+            "decision": "fraud",
+            "primary_risk_tags": [
+                "device_integrity",
+                "cash_out",
+                "high_ds_score"
+            ],
+            "reviewer_notes_snippet": "Clone wallet + repeated night cash-out."
+        },
+        {
+            "case_id": "SEED-002",
+            "similarity": 0.9284,
+            "decision": "fraud",
+            "primary_risk_tags": [
+                "device_integrity",
+                "geo_velocity",
+                "cash_out",
+                "high_ds_score",
+                "account_freshness"
+            ],
+            "reviewer_notes_snippet": "Classic mule pattern: fresh account, emulator, velocity, cash-out."
+        },
+        {
+            "case_id": "EVAL-FRAUD-001",
+            "similarity": 0.9113,
+            "decision": "fraud",
+            "primary_risk_tags": [
+                "device_integrity",
+                "geo_velocity",
+                "cash_out",
+                "high_ds_score",
+                "account_freshness"
+            ],
+            "reviewer_notes_snippet": "Reviewed case EVAL-FRAUD-001 for user u_fraud_001. Judgment: fraud (confidence 95%). Primary drivers: device_integrity (high): Emulator or rooted device detected; geo_velocity (high): Impossible trave"
+        },
+        {
+            "case_id": "EVAL-BORDER-002",
+            "similarity": 0.8015,
+            "decision": "needs_review",
+            "primary_risk_tags": ["cash_out"],
+            "reviewer_notes_snippet": "Reviewed case EVAL-BORDER-002 for user u_border_002. Judgment: needs_review (confidence 55%). Primary drivers: cash_out_behavior (high): Cash-out ratio 100%; risky_apps (medium): 1 high-risk installed"
+        }
+    ],
+    "critic": {
+        "contradictory_evidence": ["Verified KYC with no prior disputes"],
+        "counterfactuals": [
+            "If DS fraud score were below 0.4 and cash-out ratio below 20%, lean not_fraud.",
+            "If geo velocity were explained by VPN travel log, could reduce to needs_review."
+        ],
+        "uncertainty_notes": []
+    },
+    "explanation": {
+        "analyst_rationale": "Reviewed case DEMO-001 for user u_demo_001. Judgment: fraud (confidence 95%). Primary drivers: device_integrity (high): Emulator or rooted device detected; geo_velocity (high): Impossible travel velocity 850 km/h; cash_out_behavior (high): Cash-out ratio 100%; risky_apps (medium): 1 high-risk installed app(s) Case DEMO-001: 8 risk indicator(s), 0 stable signal(s). DS note: DS ensemble elevated.",
+        "top_reasons": [
+            "device_integrity (high): Emulator or rooted device detected",
+            "geo_velocity (high): Impossible travel velocity 850 km/h",
+            "cash_out_behavior (high): Cash-out ratio 100%",
+            "risky_apps (medium): 1 high-risk installed app(s)",
+            "account_freshness (medium): Account age 18 days"
+        ],
+        "risk_narrative": "Behavioral read: 8 risk signals. Retrieved 5 similar case(s) [EVAL-FRAUD-002 (0.96, fraud), SEED-005 (0.94, fraud), SEED-002 (0.93, fraud)]. This note reflects investigator judgment only, not customer-facing guidance."
+    },
+    "explainability": {
+        "decision": "fraud",
+        "confidence": 0.95,
+        "confidence_rationale": "High confidence: multiple independent risk signals align. Critic noted 1 contradictory item(s), tempering certainty.",
+        "top_evidence_signals": [
+            "device_integrity (high): Emulator or rooted device detected",
+            "geo_velocity (high): Impossible travel velocity 850 km/h",
+            "cash_out_behavior (high): Cash-out ratio 100%",
+            "risky_apps (medium): 1 high-risk installed app(s)",
+            "account_freshness (medium): Account age 18 days",
+            "night_usage (medium): Night usage ratio 68%",
+            "ds_fraud_score (medium): Fraud model score 0.74 (elevated)",
+            "device_instability (medium): 2 device changes in 30d",
+            "Similar cases: 4/5 prior fraud decisions",
+            "DS fraud score 0.74"
+        ],
+        "similar_cases": [
+            {
+                "case_id": "EVAL-FRAUD-002",
+                "similarity": 0.9614,
+                "decision": "fraud",
+                "primary_risk_tags": [
+                    "device_integrity",
+                    "cash_out",
+                    "high_ds_score"
+                ],
+                "reviewer_notes_snippet": "Reviewed case EVAL-FRAUD-002 for user u_fraud_002. Judgment: fraud (confidence 95%). Primary drivers: device_integrity (high): Emulator or rooted device detected; cash_out_behavior (high): Cash-out ra"
+            },
+            {
+                "case_id": "SEED-005",
+                "similarity": 0.9402,
+                "decision": "fraud",
+                "primary_risk_tags": [
+                    "device_integrity",
+                    "cash_out",
+                    "high_ds_score"
+                ],
+                "reviewer_notes_snippet": "Clone wallet + repeated night cash-out."
+            },
+            {
+                "case_id": "SEED-002",
+                "similarity": 0.9284,
+                "decision": "fraud",
+                "primary_risk_tags": [
+                    "device_integrity",
+                    "geo_velocity",
+                    "cash_out",
+                    "high_ds_score",
+                    "account_freshness"
+                ],
+                "reviewer_notes_snippet": "Classic mule pattern: fresh account, emulator, velocity, cash-out."
+            },
+            {
+                "case_id": "EVAL-FRAUD-001",
+                "similarity": 0.9113,
+                "decision": "fraud",
+                "primary_risk_tags": [
+                    "device_integrity",
+                    "geo_velocity",
+                    "cash_out",
+                    "high_ds_score",
+                    "account_freshness"
+                ],
+                "reviewer_notes_snippet": "Reviewed case EVAL-FRAUD-001 for user u_fraud_001. Judgment: fraud (confidence 95%). Primary drivers: device_integrity (high): Emulator or rooted device detected; geo_velocity (high): Impossible trave"
+            },
+            {
+                "case_id": "EVAL-BORDER-002",
+                "similarity": 0.8015,
+                "decision": "needs_review",
+                "primary_risk_tags": ["cash_out"],
+                "reviewer_notes_snippet": "Reviewed case EVAL-BORDER-002 for user u_border_002. Judgment: needs_review (confidence 55%). Primary drivers: cash_out_behavior (high): Cash-out ratio 100%; risky_apps (medium): 1 high-risk installed"
+            }
+        ],
+        "counterfactuals": [
+            "If DS fraud score were below 0.4 and cash-out ratio below 20%, lean not_fraud.",
+            "If geo velocity were explained by VPN travel log, could reduce to needs_review."
+        ],
+        "uncertainty_notes": [],
+        "contradictory_evidence": ["Verified KYC with no prior disputes"],
+        "analyst_rationale": "Reviewed case DEMO-001 for user u_demo_001. Judgment: fraud (confidence 95%). Primary drivers: device_integrity (high): Emulator or rooted device detected; geo_velocity (high): Impossible travel velocity 850 km/h; cash_out_behavior (high): Cash-out ratio 100%; risky_apps (medium): 1 high-risk installed app(s) Case DEMO-001: 8 risk indicator(s), 0 stable signal(s). DS note: DS ensemble elevated.",
+        "top_reasons": [
+            "device_integrity (high): Emulator or rooted device detected",
+            "geo_velocity (high): Impossible travel velocity 850 km/h",
+            "cash_out_behavior (high): Cash-out ratio 100%",
+            "risky_apps (medium): 1 high-risk installed app(s)",
+            "account_freshness (medium): Account age 18 days"
+        ],
+        "risk_narrative": "Behavioral read: 8 risk signals. Retrieved 5 similar case(s) [EVAL-FRAUD-002 (0.96, fraud), SEED-005 (0.94, fraud), SEED-002 (0.93, fraud)]. This note reflects investigator judgment only, not customer-facing guidance.",
+        "explanation_trace": [
+            {
+                "agent": "case_intake",
+                "status": "ok",
+                "case_id": "DEMO-001",
+                "quality_flags": [],
+                "missing_fields": []
+            },
+            {
+                "agent": "evidence_retrieval",
+                "retrieved_count": 5,
+                "matched_patterns": [
+                    "device_integrity",
+                    "high_ds_score",
+                    "cash_out",
+                    "geo_velocity"
+                ],
+                "neighbor_fraud_votes": 4,
+                "neighbor_not_fraud_votes": 0
+            },
+            {
+                "agent": "behavioral_pattern",
+                "indicator_count": 8,
+                "summary": "Case DEMO-001: 8 risk indicator(s), 0 stable signal(s). DS note: DS ensemble elevated."
+            },
+            {
+                "agent": "risk_synthesis",
+                "decision": "fraud",
+                "confidence": 0.95,
+                "score": 1.0
+            },
+            {
+                "agent": "critic",
+                "contradictions": 1,
+                "counterfactuals": 2
+            },
+            {
+                "agent": "explanation",
+                "rationale_len": 397
+            },
+            {
+                "agent": "memory_update",
+                "status": "ok",
+                "case_id": "DEMO-001"
+            }
+        ]
+    },
+    "agent_trace": [
+        {
+            "agent": "case_intake",
+            "status": "ok",
+            "case_id": "DEMO-001",
+            "quality_flags": [],
+            "missing_fields": []
+        },
+        {
+            "agent": "evidence_retrieval",
+            "retrieved_count": 5,
+            "matched_patterns": [
+                "device_integrity",
+                "high_ds_score",
+                "cash_out",
+                "geo_velocity"
+            ],
+            "neighbor_fraud_votes": 4,
+            "neighbor_not_fraud_votes": 0
+        },
+        {
+            "agent": "behavioral_pattern",
+            "indicator_count": 8,
+            "summary": "Case DEMO-001: 8 risk indicator(s), 0 stable signal(s). DS note: DS ensemble elevated."
+        },
+        {
+            "agent": "risk_synthesis",
+            "decision": "fraud",
+            "confidence": 0.95,
+            "score": 1.0
+        },
+        {
+            "agent": "critic",
+            "contradictions": 1,
+            "counterfactuals": 2
+        },
+        {
+            "agent": "explanation",
+            "rationale_len": 397
+        },
+        {
+            "agent": "memory_update",
+            "status": "ok",
+            "case_id": "DEMO-001"
+        }
+    ],
+    "quality_flags": [],
+    "missing_fields": []
+}

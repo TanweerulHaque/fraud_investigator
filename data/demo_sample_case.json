@@ -1,0 +1,544 @@
+{
+  "case_id": "DEMO-001",
+  "decision": "fraud",
+  "confidence": 0.95,
+  "decision_drivers": [
+    "device_integrity",
+    "geo_velocity",
+    "cash_out",
+    "high_ds_score"
+  ],
+  "behavioral_summary": {
+    "summary": "High risk of fraud detected for user u_demo_001 with recent transactions and installed VPN app.",
+    "risk_indicators": [
+      {
+        "signal": "device_integrity",
+        "severity": "high",
+        "detail": "User has an installed VPN app, indicating potential device tampering.",
+        "weight": 0.8
+      }
+    ],
+    "stability_notes": "The model is more likely to flag cases with device integrity issues and high geo-velocity values as potential fraud.",
+    "stable_signals": [
+      "device_integrity",
+      "geo_velocity",
+      "cash_out"
+    ],
+    "drifting_signals": []
+  },
+  "retrieved_cases": [
+    {
+      "case_id": "SEED-002",
+      "similarity": 0.7604,
+      "decision": "fraud",
+      "primary_risk_tags": [],
+      "reviewer_notes_snippet": "Classic mule pattern: fresh account, emulator, velocity, cash-out."
+    },
+    {
+      "case_id": "SEED-005",
+      "similarity": 0.6753,
+      "decision": "fraud",
+      "primary_risk_tags": [],
+      "reviewer_notes_snippet": "Clone wallet + repeated night cash-out."
+    },
+    {
+      "case_id": "SEED-003",
+      "similarity": 0.5738,
+      "decision": "not_fraud",
+      "primary_risk_tags": [],
+      "reviewer_notes_snippet": "Elevated DS but plausible merchant spend; needs manual context."
+    },
+    {
+      "case_id": "SEED-004",
+      "similarity": 0.5025,
+      "decision": "not_fraud",
+      "primary_risk_tags": [],
+      "reviewer_notes_snippet": "Dormant/low activity, insufficient fraud signal."
+    },
+    {
+      "case_id": "SEED-001",
+      "similarity": 0.3794,
+      "decision": "not_fraud",
+      "primary_risk_tags": [],
+      "reviewer_notes_snippet": "Long-tenure user, benign spend pattern."
+    }
+  ],
+  "critic": {
+    "contradictory_evidence": [
+      "The model's confidence in its decision may vary depending on the similarity score with other cases.",
+      "The presence of cash-out transactions also increases the likelihood of a fraudulent case being flagged, but the retrieved cases show a mix of fraud and non-fraud decisions."
+    ],
+    "counterfactuals": [
+      "What if the model had not considered the device integrity issue? Would it have still flagged the case as fraudulent?",
+      "If the cash-out transactions were not present, would the model have still flagged the case as fraudulent?"
+    ],
+    "uncertainty_notes": [
+      "The model's decision may be influenced by its training data and algorithms.",
+      "There is a risk that the model may overfit to certain patterns in the data."
+    ]
+  },
+  "explanation": {
+    "analyst_rationale": "The reviewer has flagged this case as 'fraud' with a confidence of 0.95, primarily driven by device integrity issues, high geo-velocity values, cash-out transactions, and high device risk scores. However, there is some contradictory evidence suggesting that the model's confidence in its decision may vary depending on the similarity score with other cases, and the presence of cash-out transactions also increases the likelihood of a fraudulent case being flagged.",
+    "top_reasons": [
+      "device_integrity",
+      "geo_velocity",
+      "cash_out",
+      "high_ds_score"
+    ],
+    "risk_narrative": "The model is more likely to flag cases with device integrity issues and high geo-velocity values as potential fraud, and the presence of cash-out transactions also increases the likelihood of a fraudulent case being flagged. However, there are some counterfactuals and uncertainties that should be considered, such as what if the model had not considered the device integrity issue or if the cash-out transactions were not present."
+  },
+  "explainability": {
+    "decision": "fraud",
+    "confidence": 0.95,
+    "confidence_rationale": "High confidence: multiple independent risk signals align. Critic noted 2 contradictory item(s), tempering certainty.",
+    "top_evidence_signals": [
+      "device_integrity",
+      "geo_velocity",
+      "cash_out",
+      "high_ds_score",
+      "device_integrity: high"
+    ],
+    "similar_cases": [
+      {
+        "case_id": "SEED-002",
+        "similarity": 0.7604,
+        "decision": "fraud",
+        "primary_risk_tags": [],
+        "reviewer_notes_snippet": "Classic mule pattern: fresh account, emulator, velocity, cash-out."
+      },
+      {
+        "case_id": "SEED-005",
+        "similarity": 0.6753,
+        "decision": "fraud",
+        "primary_risk_tags": [],
+        "reviewer_notes_snippet": "Clone wallet + repeated night cash-out."
+      },
+      {
+        "case_id": "SEED-003",
+        "similarity": 0.5738,
+        "decision": "not_fraud",
+        "primary_risk_tags": [],
+        "reviewer_notes_snippet": "Elevated DS but plausible merchant spend; needs manual context."
+      },
+      {
+        "case_id": "SEED-004",
+        "similarity": 0.5025,
+        "decision": "not_fraud",
+        "primary_risk_tags": [],
+        "reviewer_notes_snippet": "Dormant/low activity, insufficient fraud signal."
+      },
+      {
+        "case_id": "SEED-001",
+        "similarity": 0.3794,
+        "decision": "not_fraud",
+        "primary_risk_tags": [],
+        "reviewer_notes_snippet": "Long-tenure user, benign spend pattern."
+      }
+    ],
+    "counterfactuals": [
+      "What if the model had not considered the device integrity issue? Would it have still flagged the case as fraudulent?",
+      "If the cash-out transactions were not present, would the model have still flagged the case as fraudulent?"
+    ],
+    "uncertainty_notes": [
+      "The model's decision may be influenced by its training data and algorithms.",
+      "There is a risk that the model may overfit to certain patterns in the data."
+    ],
+    "contradictory_evidence": [
+      "The model's confidence in its decision may vary depending on the similarity score with other cases.",
+      "The presence of cash-out transactions also increases the likelihood of a fraudulent case being flagged, but the retrieved cases show a mix of fraud and non-fraud decisions."
+    ],
+    "analyst_rationale": "The reviewer has flagged this case as 'fraud' with a confidence of 0.95, primarily driven by device integrity issues, high geo-velocity values, cash-out transactions, and high device risk scores. However, there is some contradictory evidence suggesting that the model's confidence in its decision may vary depending on the similarity score with other cases, and the presence of cash-out transactions also increases the likelihood of a fraudulent case being flagged.",
+    "top_reasons": [
+      "device_integrity",
+      "geo_velocity",
+      "cash_out",
+      "high_ds_score"
+    ],
+    "risk_narrative": "The model is more likely to flag cases with device integrity issues and high geo-velocity values as potential fraud, and the presence of cash-out transactions also increases the likelihood of a fraudulent case being flagged. However, there are some counterfactuals and uncertainties that should be considered, such as what if the model had not considered the device integrity issue or if the cash-out transactions were not present.",
+    "explanation_trace": [
+      {
+        "agent": "case_intake",
+        "structured_keys": [
+          "case_id",
+          "quality_flags",
+          "missing_fields",
+          "intake_notes"
+        ]
+      },
+      {
+        "agent": "embedding",
+        "structured_keys": [
+          "case_id",
+          "case_summary",
+          "feature_dim",
+          "summary_embedding_dim",
+          "combined_dim"
+        ]
+      },
+      {
+        "agent": "evidence_retrieval",
+        "structured_keys": [
+          "retrieved_count",
+          "matched_patterns",
+          "neighbor_fraud_votes",
+          "neighbor_not_fraud_votes"
+        ]
+      },
+      {
+        "agent": "behavioral_pattern",
+        "structured_keys": [
+          "summary",
+          "risk_indicators",
+          "stability_notes",
+          "stable_signals",
+          "drifting_signals"
+        ]
+      },
+      {
+        "agent": "risk_synthesis",
+        "structured_keys": [
+          "decision",
+          "confidence",
+          "decision_drivers",
+          "reasoning"
+        ]
+      },
+      {
+        "agent": "critic",
+        "structured_keys": [
+          "contradictory_evidence",
+          "counterfactuals",
+          "uncertainty_notes",
+          "reasoning"
+        ]
+      },
+      {
+        "agent": "explanation",
+        "structured_keys": [
+          "analyst_rationale",
+          "top_reasons",
+          "risk_narrative"
+        ]
+      },
+      {
+        "agent": "memory_update",
+        "structured_keys": [
+          "case_id",
+          "stored",
+          "chroma_id"
+        ]
+      }
+    ]
+  },
+  "agent_trace": [
+    {
+      "agent": "case_intake",
+      "structured_keys": [
+        "case_id",
+        "quality_flags",
+        "missing_fields",
+        "intake_notes"
+      ]
+    },
+    {
+      "agent": "embedding",
+      "structured_keys": [
+        "case_id",
+        "case_summary",
+        "feature_dim",
+        "summary_embedding_dim",
+        "combined_dim"
+      ]
+    },
+    {
+      "agent": "evidence_retrieval",
+      "structured_keys": [
+        "retrieved_count",
+        "matched_patterns",
+        "neighbor_fraud_votes",
+        "neighbor_not_fraud_votes"
+      ]
+    },
+    {
+      "agent": "behavioral_pattern",
+      "structured_keys": [
+        "summary",
+        "risk_indicators",
+        "stability_notes",
+        "stable_signals",
+        "drifting_signals"
+      ]
+    },
+    {
+      "agent": "risk_synthesis",
+      "structured_keys": [
+        "decision",
+        "confidence",
+        "decision_drivers",
+        "reasoning"
+      ]
+    },
+    {
+      "agent": "critic",
+      "structured_keys": [
+        "contradictory_evidence",
+        "counterfactuals",
+        "uncertainty_notes",
+        "reasoning"
+      ]
+    },
+    {
+      "agent": "explanation",
+      "structured_keys": [
+        "analyst_rationale",
+        "top_reasons",
+        "risk_narrative"
+      ]
+    },
+    {
+      "agent": "memory_update",
+      "structured_keys": [
+        "case_id",
+        "stored",
+        "chroma_id"
+      ]
+    }
+  ],
+  "agent_outputs": {
+    "case_intake": {
+      "agent_name": "case_intake",
+      "raw": {
+        "quality_flags": [
+          "missing_reviewer_label"
+        ],
+        "missing_fields": [
+          "reviewer_label"
+        ],
+        "intake_notes": "Case has missing reviewer label, but all other required fields are present."
+      },
+      "structured": {
+        "case_id": "DEMO-001",
+        "quality_flags": [
+          "missing_reviewer_label"
+        ],
+        "missing_fields": [
+          "reviewer_label"
+        ],
+        "intake_notes": "Case has missing reviewer label, but all other required fields are present."
+      }
+    },
+    "embedding": {
+      "agent_name": "embedding",
+      "raw": {
+        "case_summary": "A user with a verified account and recent transactions (2 transactions totaling ₹60,000) is being reviewed. The user has an installed VPN app and high device risk scores. The case lacks a reviewer label, prompting the need for review.",
+        "embedding_preview_dims": 401
+      },
+      "structured": {
+        "case_id": "DEMO-001",
+        "case_summary": "A user with a verified account and recent transactions (2 transactions totaling ₹60,000) is being reviewed. The user has an installed VPN app and high device risk scores. The case lacks a reviewer label, prompting the need for review.",
+        "feature_dim": 17,
+        "summary_embedding_dim": 384,
+        "combined_dim": 401
+      }
+    },
+    "evidence_retrieval": {
+      "agent_name": "evidence_retrieval",
+      "raw": {
+        "matched_patterns": [
+          "device_integrity",
+          "geo_velocity",
+          "cash_out",
+          "high_ds_score"
+        ],
+        "retrieval_analysis": "Similar cases from Chroma show a mix of fraud and non-fraud decisions, with varying levels of similarity. The top matching case is 'SEED-002' with a high similarity score (0.7604), indicating strong evidence for fraud. However, the other cases have lower similarity scores, suggesting that the model may be less confident in its decision.",
+        "lessons_from_history": "The past pass/fail outcomes imply that the model is more likely to flag cases with device integrity issues and high geo-velocity values as potential fraud. The presence of cash-out transactions also increases the likelihood of a fraudulent case being flagged. However, the model's confidence in these decisions may vary depending on the similarity score with other cases. It is essential to review the reviewer notes snippet for each case to understand the reasoning behind the decision.",
+        "retrieved_cases": [
+          {
+            "case_id": "SEED-002",
+            "similarity": 0.7604,
+            "decision": "fraud",
+            "primary_risk_tags": [],
+            "reviewer_notes_snippet": "Classic mule pattern: fresh account, emulator, velocity, cash-out."
+          },
+          {
+            "case_id": "SEED-005",
+            "similarity": 0.6753,
+            "decision": "fraud",
+            "primary_risk_tags": [],
+            "reviewer_notes_snippet": "Clone wallet + repeated night cash-out."
+          },
+          {
+            "case_id": "SEED-003",
+            "similarity": 0.5738,
+            "decision": "not_fraud",
+            "primary_risk_tags": [],
+            "reviewer_notes_snippet": "Elevated DS but plausible merchant spend; needs manual context."
+          },
+          {
+            "case_id": "SEED-004",
+            "similarity": 0.5025,
+            "decision": "not_fraud",
+            "primary_risk_tags": [],
+            "reviewer_notes_snippet": "Dormant/low activity, insufficient fraud signal."
+          },
+          {
+            "case_id": "SEED-001",
+            "similarity": 0.3794,
+            "decision": "not_fraud",
+            "primary_risk_tags": [],
+            "reviewer_notes_snippet": "Long-tenure user, benign spend pattern."
+          }
+        ]
+      },
+      "structured": {
+        "retrieved_count": 5,
+        "matched_patterns": [
+          "device_integrity",
+          "geo_velocity",
+          "cash_out",
+          "high_ds_score"
+        ],
+        "neighbor_fraud_votes": 2,
+        "neighbor_not_fraud_votes": 3
+      }
+    },
+    "behavioral_pattern": {
+      "agent_name": "behavioral_pattern",
+      "raw": {
+        "summary": "High risk of fraud detected for user u_demo_001 with recent transactions and installed VPN app.",
+        "risk_indicators": [
+          {
+            "signal": "device_integrity",
+            "severity": "high",
+            "detail": "User has an installed VPN app, indicating potential device tampering.",
+            "weight": 0.8
+          }
+        ],
+        "stability_notes": "The model is more likely to flag cases with device integrity issues and high geo-velocity values as potential fraud.",
+        "stable_signals": [
+          "device_integrity",
+          "geo_velocity",
+          "cash_out"
+        ],
+        "drifting_signals": []
+      },
+      "structured": {
+        "summary": "High risk of fraud detected for user u_demo_001 with recent transactions and installed VPN app.",
+        "risk_indicators": [
+          {
+            "signal": "device_integrity",
+            "severity": "high",
+            "detail": "User has an installed VPN app, indicating potential device tampering.",
+            "weight": 0.8
+          }
+        ],
+        "stability_notes": "The model is more likely to flag cases with device integrity issues and high geo-velocity values as potential fraud.",
+        "stable_signals": [
+          "device_integrity",
+          "geo_velocity",
+          "cash_out"
+        ],
+        "drifting_signals": []
+      }
+    },
+    "risk_synthesis": {
+      "agent_name": "risk_synthesis",
+      "raw": {
+        "decision": "fraud",
+        "confidence": 0.95,
+        "decision_drivers": [
+          "device_integrity",
+          "geo_velocity",
+          "cash_out",
+          "high_ds_score"
+        ],
+        "reasoning": "The model is more likely to flag cases with device integrity issues and high geo-velocity values as potential fraud, and the presence of cash-out transactions also increases the likelihood of a fraudulent case being flagged. The retrieved cases show a mix of fraud and non-fraud decisions, but the top matching case 'SEED-002' has a high similarity score (0.7604), indicating strong evidence for fraud."
+      },
+      "structured": {
+        "decision": "fraud",
+        "confidence": 0.95,
+        "decision_drivers": [
+          "device_integrity",
+          "geo_velocity",
+          "cash_out",
+          "high_ds_score"
+        ],
+        "reasoning": "The model is more likely to flag cases with device integrity issues and high geo-velocity values as potential fraud, and the presence of cash-out transactions also increases the likelihood of a fraudulent case being flagged. The retrieved cases show a mix of fraud and non-fraud decisions, but the top matching case 'SEED-002' has a high similarity score (0.7604), indicating strong evidence for fraud."
+      }
+    },
+    "critic": {
+      "agent_name": "critic",
+      "raw": {
+        "contradictory_evidence": [
+          "The model's confidence in its decision may vary depending on the similarity score with other cases.",
+          "The presence of cash-out transactions also increases the likelihood of a fraudulent case being flagged, but the retrieved cases show a mix of fraud and non-fraud decisions."
+        ],
+        "counterfactuals": [
+          "What if the model had not considered the device integrity issue? Would it have still flagged the case as fraudulent?",
+          "If the cash-out transactions were not present, would the model have still flagged the case as fraudulent?"
+        ],
+        "uncertainty_notes": [
+          "The model's decision may be influenced by its training data and algorithms.",
+          "There is a risk that the model may overfit to certain patterns in the data."
+        ],
+        "reasoning": "The reviewer's judgment of 'fraud' seems confident, but there are some potential counterfactuals and uncertainties that should be considered. The model's decision may be influenced by its training data and algorithms, and there is a risk that it may overfit to certain patterns in the data."
+      },
+      "structured": {
+        "contradictory_evidence": [
+          "The model's confidence in its decision may vary depending on the similarity score with other cases.",
+          "The presence of cash-out transactions also increases the likelihood of a fraudulent case being flagged, but the retrieved cases show a mix of fraud and non-fraud decisions."
+        ],
+        "counterfactuals": [
+          "What if the model had not considered the device integrity issue? Would it have still flagged the case as fraudulent?",
+          "If the cash-out transactions were not present, would the model have still flagged the case as fraudulent?"
+        ],
+        "uncertainty_notes": [
+          "The model's decision may be influenced by its training data and algorithms.",
+          "There is a risk that the model may overfit to certain patterns in the data."
+        ],
+        "reasoning": "The reviewer's judgment of 'fraud' seems confident, but there are some potential counterfactuals and uncertainties that should be considered. The model's decision may be influenced by its training data and algorithms, and there is a risk that it may overfit to certain patterns in the data."
+      }
+    },
+    "explanation": {
+      "agent_name": "explanation",
+      "raw": {
+        "analyst_rationale": "The reviewer has flagged this case as 'fraud' with a confidence of 0.95, primarily driven by device integrity issues, high geo-velocity values, cash-out transactions, and high device risk scores. However, there is some contradictory evidence suggesting that the model's confidence in its decision may vary depending on the similarity score with other cases, and the presence of cash-out transactions also increases the likelihood of a fraudulent case being flagged.",
+        "top_reasons": [
+          "device_integrity",
+          "geo_velocity",
+          "cash_out",
+          "high_ds_score"
+        ],
+        "risk_narrative": "The model is more likely to flag cases with device integrity issues and high geo-velocity values as potential fraud, and the presence of cash-out transactions also increases the likelihood of a fraudulent case being flagged. However, there are some counterfactuals and uncertainties that should be considered, such as what if the model had not considered the device integrity issue or if the cash-out transactions were not present."
+      },
+      "structured": {
+        "analyst_rationale": "The reviewer has flagged this case as 'fraud' with a confidence of 0.95, primarily driven by device integrity issues, high geo-velocity values, cash-out transactions, and high device risk scores. However, there is some contradictory evidence suggesting that the model's confidence in its decision may vary depending on the similarity score with other cases, and the presence of cash-out transactions also increases the likelihood of a fraudulent case being flagged.",
+        "top_reasons": [
+          "device_integrity",
+          "geo_velocity",
+          "cash_out",
+          "high_ds_score"
+        ],
+        "risk_narrative": "The model is more likely to flag cases with device integrity issues and high geo-velocity values as potential fraud, and the presence of cash-out transactions also increases the likelihood of a fraudulent case being flagged. However, there are some counterfactuals and uncertainties that should be considered, such as what if the model had not considered the device integrity issue or if the cash-out transactions were not present."
+      }
+    },
+    "memory_update": {
+      "agent_name": "memory_update",
+      "raw": {
+        "storage_rationale": "Decision to classify case as fraud was based on sufficient evidence, including device integrity and high DS score.",
+        "lessons_for_future_cases": "Further review of cases involving similar patterns of behavior is necessary to ensure accuracy in classification."
+      },
+      "structured": {
+        "case_id": "DEMO-001",
+        "stored": true,
+        "chroma_id": "DEMO-001"
+      }
+    }
+  },
+  "quality_flags": [
+    "missing_reviewer_label"
+  ],
+  "missing_fields": [
+    "reviewer_label"
+  ]
+}

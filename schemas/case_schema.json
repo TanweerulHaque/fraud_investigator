@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FraudCase",
+  "type": "object",
+  "required": ["case_id", "user_profile", "device", "model_scores"],
+  "properties": {
+    "case_id": { "type": "string" },
+    "user_profile": {
+      "type": "object",
+      "required": ["user_id", "account_age_days"],
+      "properties": {
+        "user_id": { "type": "string" },
+        "account_age_days": { "type": "integer", "minimum": 0 },
+        "kyc_status": { "type": "string" },
+        "prior_disputes": { "type": "integer" }
+      }
+    },
+    "installed_apps": { "type": "array" },
+    "transactions": { "type": "array" },
+    "app_usage": { "type": "object" },
+    "location_patterns": { "type": "object" },
+    "device": {
+      "type": "object",
+      "required": ["device_id", "os"],
+      "properties": {
+        "device_id": { "type": "string" },
+        "os": { "type": "string" },
+        "is_emulator": { "type": "boolean" },
+        "is_rooted": { "type": "boolean" },
+        "device_changes_30d": { "type": "integer" }
+      }
+    },
+    "model_scores": {
+      "type": "object",
+      "required": ["fraud_score"],
+      "properties": {
+        "fraud_score": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "prior_reviews": { "type": "array" },
+    "reviewer_label": { "type": "string", "enum": ["fraud", "not_fraud"] },
+    "metadata": { "type": "object" }
+  }
+}

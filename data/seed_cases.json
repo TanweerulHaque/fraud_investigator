@@ -1,0 +1,278 @@
+{
+    "cases": [
+        {
+            "case_id": "SEED-001",
+            "user_profile": {
+                "user_id": "u_seed_001",
+                "account_age_days": 420,
+                "kyc_status": "verified",
+                "prior_disputes": 0
+            },
+            "installed_apps": [
+                {
+                    "package_name": "com.bank.app",
+                    "risk_category": "finance",
+                    "install_days_ago": 400
+                }
+            ],
+            "transactions": [
+                {
+                    "txn_id": "t1",
+                    "amount": 1200,
+                    "merchant_category": "grocery",
+                    "channel": "upi",
+                    "timestamp": "2025-04-01T10:00:00",
+                    "is_cash_out": false
+                },
+                {
+                    "txn_id": "t2",
+                    "amount": 800,
+                    "merchant_category": "fuel",
+                    "channel": "upi",
+                    "timestamp": "2025-04-03T14:00:00",
+                    "is_cash_out": false
+                }
+            ],
+            "app_usage": {
+                "sessions_per_day": 2.1,
+                "night_usage_ratio": 0.15,
+                "unique_locations_7d": 2
+            },
+            "location_patterns": {
+                "home_country": "IN",
+                "countries_7d": ["IN"],
+                "max_geo_velocity_kmph": 45
+            },
+            "device": {
+                "device_id": "d1",
+                "os": "android",
+                "is_emulator": false,
+                "is_rooted": false,
+                "device_changes_30d": 0
+            },
+            "model_scores": {
+                "fraud_score": 0.12,
+                "aml_score": 0.08,
+                "account_takeover_score": 0.05
+            },
+            "reviewer_label": "not_fraud",
+            "metadata": {
+                "reviewer_notes": "Long-tenure user, benign spend pattern."
+            }
+        },
+        {
+            "case_id": "SEED-002",
+            "user_profile": {
+                "user_id": "u_seed_002",
+                "account_age_days": 12,
+                "kyc_status": "verified",
+                "prior_disputes": 0
+            },
+            "installed_apps": [
+                {
+                    "package_name": "com.vpn.proxy",
+                    "risk_category": "vpn",
+                    "install_days_ago": 5
+                },
+                {
+                    "package_name": "com.bet.app",
+                    "risk_category": "gambling",
+                    "install_days_ago": 3
+                }
+            ],
+            "transactions": [
+                {
+                    "txn_id": "t1",
+                    "amount": 45000,
+                    "merchant_category": "wallet_transfer",
+                    "channel": "upi",
+                    "timestamp": "2025-04-10T02:00:00",
+                    "is_cash_out": true
+                },
+                {
+                    "txn_id": "t2",
+                    "amount": 38000,
+                    "merchant_category": "atm",
+                    "channel": "atm",
+                    "timestamp": "2025-04-10T03:30:00",
+                    "is_cash_out": true
+                }
+            ],
+            "app_usage": {
+                "sessions_per_day": 8.5,
+                "night_usage_ratio": 0.72,
+                "unique_locations_7d": 6
+            },
+            "location_patterns": {
+                "home_country": "IN",
+                "countries_7d": ["IN", "AE"],
+                "max_geo_velocity_kmph": 920
+            },
+            "device": {
+                "device_id": "d2",
+                "os": "android",
+                "is_emulator": true,
+                "is_rooted": true,
+                "device_changes_30d": 3
+            },
+            "model_scores": {
+                "fraud_score": 0.88,
+                "aml_score": 0.55,
+                "account_takeover_score": 0.71
+            },
+            "reviewer_label": "fraud",
+            "metadata": {
+                "reviewer_notes": "Classic mule pattern: fresh account, emulator, velocity, cash-out."
+            }
+        },
+        {
+            "case_id": "SEED-003",
+            "user_profile": {
+                "user_id": "u_seed_003",
+                "account_age_days": 90,
+                "kyc_status": "verified",
+                "prior_disputes": 1
+            },
+            "installed_apps": [
+                {
+                    "package_name": "com.shop.app",
+                    "risk_category": "utility",
+                    "install_days_ago": 60
+                }
+            ],
+            "transactions": [
+                {
+                    "txn_id": "t1",
+                    "amount": 5000,
+                    "merchant_category": "electronics",
+                    "channel": "card",
+                    "timestamp": "2025-04-05T11:00:00",
+                    "is_cash_out": false
+                }
+            ],
+            "app_usage": {
+                "sessions_per_day": 3.0,
+                "night_usage_ratio": 0.35,
+                "unique_locations_7d": 3
+            },
+            "location_patterns": {
+                "home_country": "IN",
+                "countries_7d": ["IN"],
+                "max_geo_velocity_kmph": 120
+            },
+            "device": {
+                "device_id": "d3",
+                "os": "ios",
+                "is_emulator": false,
+                "is_rooted": false,
+                "device_changes_30d": 1
+            },
+            "model_scores": {
+                "fraud_score": 0.48,
+                "aml_score": 0.3,
+                "account_takeover_score": 0.35
+            },
+            "reviewer_label": "not_fraud",
+            "metadata": {
+                "reviewer_notes": "Elevated DS but plausible merchant spend; needs manual context."
+            }
+        },
+        {
+            "case_id": "SEED-004",
+            "user_profile": {
+                "user_id": "u_seed_004",
+                "account_age_days": 200,
+                "kyc_status": "verified",
+                "prior_disputes": 0
+            },
+            "installed_apps": [],
+            "transactions": [],
+            "app_usage": {
+                "sessions_per_day": 1.0,
+                "night_usage_ratio": 0.2,
+                "unique_locations_7d": 1
+            },
+            "location_patterns": {
+                "home_country": "IN",
+                "countries_7d": ["IN"],
+                "max_geo_velocity_kmph": 0
+            },
+            "device": {
+                "device_id": "d4",
+                "os": "android",
+                "is_emulator": false,
+                "is_rooted": false,
+                "device_changes_30d": 0
+            },
+            "model_scores": {
+                "fraud_score": 0.25,
+                "aml_score": 0.1,
+                "account_takeover_score": 0.15
+            },
+            "reviewer_label": "not_fraud",
+            "metadata": {
+                "reviewer_notes": "Dormant/low activity, insufficient fraud signal."
+            }
+        },
+        {
+            "case_id": "SEED-005",
+            "user_profile": {
+                "user_id": "u_seed_005",
+                "account_age_days": 25,
+                "kyc_status": "pending",
+                "prior_disputes": 0
+            },
+            "installed_apps": [
+                {
+                    "package_name": "com.clone.wallet",
+                    "risk_category": "clone",
+                    "install_days_ago": 2
+                }
+            ],
+            "transactions": [
+                {
+                    "txn_id": "t1",
+                    "amount": 15000,
+                    "merchant_category": "p2p",
+                    "channel": "upi",
+                    "timestamp": "2025-04-12T23:00:00",
+                    "is_cash_out": true
+                },
+                {
+                    "txn_id": "t2",
+                    "amount": 12000,
+                    "merchant_category": "p2p",
+                    "channel": "upi",
+                    "timestamp": "2025-04-13T00:15:00",
+                    "is_cash_out": true
+                }
+            ],
+            "app_usage": {
+                "sessions_per_day": 6.0,
+                "night_usage_ratio": 0.55,
+                "unique_locations_7d": 4
+            },
+            "location_patterns": {
+                "home_country": "IN",
+                "countries_7d": ["IN"],
+                "max_geo_velocity_kmph": 200
+            },
+            "device": {
+                "device_id": "d5",
+                "os": "android",
+                "is_emulator": false,
+                "is_rooted": true,
+                "device_changes_30d": 2
+            },
+            "model_scores": {
+                "fraud_score": 0.72,
+                "aml_score": 0.4,
+                "account_takeover_score": 0.5
+            },
+            "reviewer_label": "fraud",
+            "metadata": {
+                "reviewer_notes": "Clone wallet + repeated night cash-out."
+            }
+        }
+    ]
+}

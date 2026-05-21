@@ -1,0 +1,49 @@
+{
+  "project_name": "Fraud Investigator Twin",
+  "environment": "local",
+  "paths": {
+    "data_dir": "data",
+    "cases_dir": "data/cases",
+    "db_path": "data/fraud_twin.db",
+    "chroma_path": "data/chroma",
+    "graph_artifact_dir": "data/artifacts",
+    "seed_cases": "data/seed_cases.json",
+    "eval_cases": "data/eval_cases.json"
+  },
+  "llm": {
+    "provider": "ollama",
+    "base_url": "http://localhost:11434",
+    "temperature": 0.1,
+    "use_llm": true,
+    "agents": {
+      "case_intake": "llama3.2:3b",
+      "embedding": "llama3.2:3b",
+      "evidence_retrieval": "llama3.2:3b",
+      "behavioral_pattern": "llama3.2:3b",
+      "risk_synthesis": "llama3.2:3b",
+      "critic": "llama3.2:3b",
+      "explanation": "llama3.2:3b",
+      "memory_update": "llama3.2:3b"
+    }
+  },
+  "embeddings": {
+    "provider": "ollama",
+    "model": "all-minilm:22m",
+    "base_url": "http://localhost:11434"
+  },
+  "chroma": {
+    "collection_name": "fraud_case_vectors"
+  },
+  "langsmith": {
+    "enabled": false,
+    "project": "fraud-investigator-twin"
+  },
+  "retrieval": {
+    "top_k": 2,
+    "min_similarity": 0.35
+  },
+  "logging": {
+    "level": "INFO",
+    "trace_agents": true
+  }
+}

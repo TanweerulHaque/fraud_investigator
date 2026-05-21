@@ -1,0 +1,23 @@
+{
+  "_comment": "Copy to config.json. Every llm.agents key is required. Models must exist in `ollama list`.",
+  "llm": {
+    "provider": "ollama",
+    "base_url": "http://localhost:11434",
+    "use_llm": true,
+    "agents": {
+      "case_intake": "llama3.2:3b",
+      "embedding": "llama3.2:3b",
+      "evidence_retrieval": "llama3.2:3b",
+      "behavioral_pattern": "llama3.2:3b",
+      "risk_synthesis": "llama3.2:3b",
+      "critic": "llama3.2:3b",
+      "explanation": "llama3.2:3b",
+      "memory_update": "llama3.2:3b"
+    }
+  },
+  "embeddings": {
+    "provider": "ollama",
+    "model": "all-minilm:22m",
+    "base_url": "http://localhost:11434"
+  }
+}

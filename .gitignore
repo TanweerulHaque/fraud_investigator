@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.env
+.venv/
+venv/
+data/fraud_twin.db
+data/vector_store/
+data/chroma/
+data/artifacts/
+data/eval_report.json
+*.egg-info/
+.pytest_cache/
+.DS_Store
