@@ -23,6 +23,9 @@ class CaseIntakeAgent(BaseAgent):
     def run(self, state: InvestigatorState) -> dict:
         logger.info("[CaseIntake] Starting run")
         raw = state.get("raw_case") or {}
+
+        logger.info(f"Raw case data: {raw}")
+
         missing: list[str] = []
         if not raw.get("transactions"):
             missing.append("transactions")

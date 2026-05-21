@@ -51,6 +51,6 @@ class LongTermMemory:
         self,
         query_vector: list[float],
         exclude_case_id: str | None = None,
-        top_k: int = 5,
+        top_k: int = 2,
     ):
         return self.search_tool.search(query_vector, exclude_case_id=exclude_case_id, top_k=top_k)

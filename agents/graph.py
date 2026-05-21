@@ -82,6 +82,9 @@ def run_investigation(
     setup_logging()
     setup_langsmith()
 
+    if "reviewer_label" in raw_case:
+        del raw_case["reviewer_label"]
+
     initial: InvestigatorState = {
         "raw_case": raw_case,
         "agent_trace": [],
